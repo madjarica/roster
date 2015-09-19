@@ -1,17 +1,32 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| ALL USERS
+|--------------------------------------------------------------------------|
+*/
+
+Route::get('/', [
+    'as' => 'home',
+    'uses' => 'AllUsersPagesController@getHome'
+]);
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
+| ADMIN USERS
+|--------------------------------------------------------------------------|
 */
+Route::get('/admin', [
+  'as' => 'admin-home',
+  'uses' => 'AdminPagesController@getAdminHome'
+]);
 
-Route::get('/', function()
-{
-  return View::make('hello');
-});
+Route::get('/admin/job-creator', [
+    'as' => 'admin-job-creator',
+    'uses' => 'AdminFormController@getJobCreator'
+]);
+
+Route::post('/admin/job-creator-post', [
+    'as' => 'admin-job-creator-post',
+    'uses' => 'AdminFormController@postJobCreator'
+]);
+
