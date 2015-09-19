@@ -1,0 +1,22 @@
+# Created by https://www.gitignore.io/api/laravel,linux
+
+### Laravel ###
+.env.*.php
+.env.php
+.env
+/app/config/mail.php
+
+### Composer ###
+composer.phar
+composer.lock
+
+### Linux ###
+*~
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+.DS_Store
+Thumbs.db
