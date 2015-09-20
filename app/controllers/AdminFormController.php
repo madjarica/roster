@@ -61,14 +61,19 @@ class AdminFormController extends BaseController {
 
             $p11_name = $_FILES['p11']['name'];
 
+            $p11_full = '';
+            $additional_file_full = '';
+
             if($p11_name != '' && $_FILES['p11']['error'] == 0 ) {
                 move_uploaded_file($_FILES['p11']['tmp_name'], "{$destinationPath}{$job_slug}/{$p11_name}");
+                $p11_full = $destinationPath . $job_slug . '/' . $p11_name;
             }
 
             $additional_file_name = $_FILES['additional_file']['name'];
 
             if($additional_file_name != '' && $_FILES['additional_file']['error'] == 0 ) {
                 move_uploaded_file($_FILES['additional_file']['tmp_name'], "{$destinationPath}{$job_slug}/{$additional_file_name}");
+                $additional_file_full = $destinationPath . $job_slug . '/' . $additional_file_name;
             }
 
             $job = Job::create([
@@ -80,8 +85,8 @@ class AdminFormController extends BaseController {
                 'job_display_end' => $job_display_end,
                 'job_information' => $job_information,
                 'location' => $location,
-                'p11' => $destinationPath . $job_slug . $p11_name,
-                'additional_file' => $destinationPath . $job_slug . $additional_file_name,
+                'p11' => ltrim($p11_full, 'public/'),
+                'additional_file' => ltrim($additional_file_full, 'public/'),
                 'email_list' => $email_list,
                 'highlighted' => $highlighted,
                 'custom_form' => $custom_form,

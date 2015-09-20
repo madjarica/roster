@@ -10,6 +10,21 @@ Route::get('/', [
     'uses' => 'AllUsersPagesController@getHome'
 ]);
 
+Route::get('/view-job/{id}', [
+    'as' => 'view-job',
+    'uses' => 'AllUsersPagesController@getViewJob'
+]);
+
+Route::get('/view-jobs/{category}', [
+    'as' => 'view-jobs',
+    'uses' => 'AllUsersPagesController@getViewJobs'
+]);
+
+Route::get('/apply-job/{id}', [
+    'as' => 'apply-job',
+    'uses' => 'AllUsersPagesController@getApplyJob'
+]);
+
 /*
 |--------------------------------------------------------------------------
 | ADMIN USERS
