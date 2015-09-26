@@ -14,6 +14,7 @@
   {{ HTML::style('bower_components/AdminLTE/dist/css/AdminLTE.min.css') }}
 
   {{ HTML::style('bower_components/AdminLTE/plugins/datepicker/datepicker3.css') }}
+  {{ HTML::style('bower_components/AdminLTE/plugins/datatables/dataTables.bootstrap.css') }}
 
   {{ HTML::style('bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') }}
 
@@ -69,6 +70,8 @@
 {{ HTML::script('http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') }}
 {{ HTML::script('bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js') }}
 {{ HTML::script('bower_components/AdminLTE/plugins/ckeditor/ckeditor.js') }}
+{{ HTML::script('bower_components/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}
+{{ HTML::script('bower_components/AdminLTE/plugins/datatables/dataTables.bootstrap.js') }}
 
 @yield('scripts')
 

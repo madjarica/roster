@@ -88,3 +88,21 @@ Route::filter('csrf', function()
     throw new Illuminate\Session\TokenMismatchException;
   }
 });
+
+Route::filter('can_view', function () {
+    if (!Entrust::can('can_view')) {
+        return Redirect::to('/');
+    }
+});
+
+Route::filter('can_add', function () {
+    if (!Entrust::can('can_add')) {
+        return Redirect::to('/');
+    }
+});
+
+Route::filter('all_permissions', function () {
+    if (!Entrust::can('all_permissions')) {
+        return Redirect::to('/');
+    }
+});

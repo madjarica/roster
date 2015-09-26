@@ -9,7 +9,6 @@
 </h1>
 <ol class="breadcrumb">
     <li><a href="{{ URL::route('admin-home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Here</li>
 </ol>
 </section>
 

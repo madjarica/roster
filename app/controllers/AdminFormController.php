@@ -8,7 +8,7 @@ class AdminFormController extends BaseController {
     }
 
     public function postJobCreator() {
-        $validator = new Validator(Input::all(), [
+        $validator = Validator::make(Input::all(), [
             'job_type' => 'required',
             'job_name' => 'required',
             'job_start' => '',
@@ -24,7 +24,7 @@ class AdminFormController extends BaseController {
             'custom_form' => ''
         ]);
 
-        if(1 == 0) {
+        if($validator->fails()) {
             return Redirect::route('admin-job-creator')
                 ->withErrors($validator)
                 ->withInput();
@@ -45,6 +45,7 @@ class AdminFormController extends BaseController {
             } else {
                 $highlighted = 0;
             }
+
 
             //Create slug
             $lettersNumbersSpacesHypens = '/[^\-\s\pN\pL]+/u';
@@ -76,6 +77,9 @@ class AdminFormController extends BaseController {
                 $additional_file_full = $destinationPath . $job_slug . '/' . $additional_file_name;
             }
 
+            $p11_full = ltrim($p11_full, 'public/');
+            $additional_file_full = ltrim($additional_file_full, 'public/');
+
             $job = Job::create([
                 'job_type' => $job_type,
                 'job_name' => $job_name,
@@ -85,8 +89,8 @@ class AdminFormController extends BaseController {
                 'job_display_end' => $job_display_end,
                 'job_information' => $job_information,
                 'location' => $location,
-                'p11' => ltrim($p11_full, 'public/'),
-                'additional_file' => ltrim($additional_file_full, 'public/'),
+                'p11' => $p11_full,
+                'additional_file' => $additional_file_full,
                 'email_list' => $email_list,
                 'highlighted' => $highlighted,
                 'custom_form' => $custom_form,
@@ -101,6 +105,10 @@ class AdminFormController extends BaseController {
             }
 
         }
+    }
+
+    public function getViewJobs() {
+
     }
 
 }

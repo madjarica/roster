@@ -23,13 +23,16 @@
                     $array_of_types = array();
                 ?>
 
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{ URL::route('send-application', $job->id) }}" method="post" enctype="multipart/form-data">
 
                     @foreach($json_form->fields as $field)
                         <div class="row">
                             <div class="col-md-12">
                                 <?php
+                                    $name = rtrim($field->label, ': *');
                                     $name = rtrim($field->label, ':*');
+                                    $name = rtrim($field->label, '*');
+                                    $name = rtrim($field->label);
                                     $name = rtrim($field->label, ':');
 
                                     $lettersNumbersSpacesHypens = '/[^\-\s\pN\pL]+/u';
@@ -118,8 +121,17 @@
                         </div>
                     </div>
 
+                    <?php
+                        $array_types = implode(', ', $array_of_types);
+                        $array_fields =  implode(', ', $array_of_fields);
+                    ?>
+
+                    <input type="hidden" name="array_types" value="{{ $array_types }}">
+                    <input type="hidden" name="array_values" value="{{ $array_fields }}">
+
                     <div class="row">
                         <hr>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button class="btn btn-primary pull-right">Apply for job</button>
                     </div>
 

@@ -27,6 +27,21 @@
 <!-- Page Content -->
 <div class="container">
 
+@if(Session::has('notice'))
+    <br/>
+    <div class="alert alert-info">{{ Session::get('notice') }}</div>
+@endif
+
+@if(Session::has('error'))
+    <br/>
+    <div class="alert alert-danger">{{ Session::get('error') }}</div>
+@endif
+
+@if(Session::has('success'))
+    <br/>
+    <div class="alert alert-success">{{ Session::get('success') }}</div>
+@endif
+
 @yield('content')
 
 @include('all.includes.footer')

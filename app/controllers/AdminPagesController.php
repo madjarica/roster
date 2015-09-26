@@ -6,4 +6,8 @@ class AdminPagesController extends BaseController {
         return View::make('admin.home');
     }
 
+    public function getLogin() {
+        return View::make('admin.login');
+    }
+
 }

@@ -4,7 +4,7 @@
         <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Create Job
+        Jobs
         <small>New job offer</small>
     </h1>
     <ol class="breadcrumb">
@@ -33,7 +33,7 @@
         <div class="col-md-6">
             <div class="form-group @if($errors->has('job_name')) has-error has-feedback @endif">
                 <label for="job_name">Job name</label>
-                <input type="text" name="job_name" id="job_name" class="form-control" required>
+                <input type="text" name="job_name" id="job_name" class="form-control" required value="{{ Input::old('job_name') }}">
                 @if($errors->has('job_name')) <label class="control-label">{{ $errors->first('job_name') }}</label> @endif
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" id="job_start" name="job_start">
+                    <input type="text" class="form-control pull-right" id="job_start" name="job_start" value="{{ Input::old('job_start') }}">
                     @if($errors->has('job_start')) <label class="control-label">{{ $errors->first('job_start') }}</label> @endif
                 </div><!-- /.input group -->
                 <small>The date that the job starts. For positions available immediately, leave blank.</small>
@@ -61,7 +61,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" id="job_end" name="job_end">
+                    <input type="text" class="form-control pull-right" id="job_end" name="job_end" value="{{ Input::old('job_end') }}">
                     @if($errors->has('job_end')) <label class="control-label">{{ $errors->first('job_end') }}</label> @endif
                 </div><!-- /.input group -->
                 <small>The date that the job ends. For ongoing positions, leave blank.</small>
@@ -75,7 +75,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" id="job_display_start" name="job_display_start">
+                    <input type="text" class="form-control pull-right" id="job_display_start" name="job_display_start" value="{{ Input::old('job_display_start') }}">
                     @if($errors->has('job_display_start')) <label class="control-label">{{ $errors->first('job_display_start') }}</label> @endif
                 </div><!-- /.input group -->
                 <small>The date this job should start being displayed on the site. To start displaying immediately, leave blank.</small>
@@ -89,7 +89,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" id="job_display_end" name="job_display_end">
+                    <input type="text" class="form-control pull-right" id="job_display_end" name="job_display_end" value="{{ Input::old('job_display_end') }}">
                     @if($errors->has('job_display_end')) <label class="control-label">{{ $errors->first('job_display_end') }}</label> @endif
                 </div><!-- /.input group -->
                 <small>The date this job should stop being displayed on the site. To display indefinitely, leave blank.</small>
@@ -101,7 +101,7 @@
         <div class="col-md-6">
             <div class="form-group @if($errors->has('job_information')) has-error has-feedback @endif">
                 <label for="job_information">Job information in details</label>
-                <textarea name="job_information" id="job_information" cols="30" rows="10" class="form-control"></textarea>
+                <textarea name="job_information" id="job_information" cols="30" rows="10" class="form-control">{{ Input::old('job_information') }}</textarea>
                 @if($errors->has('job_information')) <label class="control-label">{{ $errors->first('job_information') }}</label> @endif
             </div>
         </div>
@@ -110,7 +110,7 @@
                 <div class="col-md-12">
                     <div class="form-group @if($errors->has('location')) has-error has-feedback @endif">
                         <label for="location">Location</label>
-                        <input type="text" name="location" id="location" class="form-control" required>
+                        <input type="text" name="location" id="location" class="form-control" required value="{{ Input::old('location') }}">
                         @if($errors->has('location')) <label class="control-label">{{ $errors->first('location') }}</label> @endif
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                     <label for="email_list">Email list</label>
                     <div class="input-group @if($errors->has('email_list')) has-error has-feedback @endif">
                         <span class="input-group-addon">@</span>
-                        <input type="text" class="form-control" placeholder="Email list for notifications, separate with comma" name="email_list" id="email_list">
+                        <input type="text" class="form-control" placeholder="Email list for notifications, separate with comma" name="email_list" id="email_list" value="{{ Input::old('email_list') }}">
                         @if($errors->has('email_list')) <label class="control-label">{{ $errors->first('email_list') }}</label> @endif
                     </div>
                 </div>
@@ -167,7 +167,7 @@
     </div>
 
 
-
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <button class="btn btn-primary margin pull-right">Save job to database</button>
 
 </form>
