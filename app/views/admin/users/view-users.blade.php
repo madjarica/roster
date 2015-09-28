@@ -37,8 +37,8 @@
                                 <th>{{ $user->first_name }}</th>
                                 <th>{{ $user->last_name }}</th>
                                 <th>@if($user->group == 1) Administrator @elseif($user->group == 2) Editor @else Viewer @endif</th>
-                                <th><a href="{{ URL::route('admin-view-user', array('id' => $user->id)) }}" class="btn btn-primary" style="display: block; margin: 0 auto;">Edit {{ $user->username }}'s profile</a></th>
-                                <th class="name_{{ $user->id }}"><a href="#" onclick="return makeSureDeleteUser({{ $user->id }})" class="btn btn-danger" style="display: block; margin: 0 auto;">Delete {{ $user->username }}</a>
+                                <th><a href="{{ URL::route('admin-view-user', array('id' => $user->id)) }}" class="btn btn-primary" style="display: block; margin: 0 auto;">Edit {{ $user->first_name }}'s profile</a></th>
+                                <th class="name_{{ $user->id }}"><a href="#" onclick="return makeSureDeleteUser({{ $user->id }})" class="btn btn-danger" style="display: block; margin: 0 auto;">Delete {{ $user->first_name }}</a>
                                 </th>
                             </tr>
                         @endforeach

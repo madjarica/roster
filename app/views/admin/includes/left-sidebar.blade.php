@@ -33,22 +33,12 @@
 
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-key"></i> <span>Settings</span>
+                    <i class="fa fa-cog"></i> <span>Settings</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ URL::route('admin-change-password') }}">Change password</a></li>
                     <li><a href="{{ URL::route('admin-change-profile-image') }}">Change profile image</a></li>
-                </ul>
-            </li>
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-briefcase"></i> <span>Jobs</span>
-                    <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ URL::route('admin-job-creator') }}">Create Job</a></li>
-                    <li><a href="#">View Jobs</a></li>
                 </ul>
             </li>
 
@@ -62,6 +52,27 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-tasks"></i> <span>Jobs</span>
+                    <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ URL::route('admin-job-creator') }}">Create Job</a></li>
+                    <li><a href="{{ URL::route('admin-view-jobs') }}">View Jobs</a></li>
+                </ul>
+            </li>
+
+            <li><a href="{{ URL::route('admin-setup-filters') }}"><i class="fa fa-filter"></i>Setup Filters</a></li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-paperclip"></i> <span>Applications</span>
+                    <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="">View All Applications</a></li>
+                    <li><a href="">View Approved only Applications</a></li>
+                </ul>
+            </li>
 
 
             {{--<li class="active"><a href="#"><span>Link</span></a></li>--}}

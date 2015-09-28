@@ -132,7 +132,7 @@ class AllUsersApplicationController extends BaseController {
                     'p11' => $p11,
                     'additional_file' => $additional_file
                 ), function($m) use ($email) {
-                    $m->to($email, $email)->subject('New application');
+                    $m->to(trim($email), trim($email))->subject('New application');
                 });
             }
 

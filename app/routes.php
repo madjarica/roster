@@ -111,6 +111,11 @@ Route::group(array('before' => 'auth'), function() {
         'uses' => 'AdminFormController@getViewJobs'
     ]);
 
+    Route::get('/admin/view-job/{id}', [
+        'as' => 'admin-view-job',
+        'uses' => 'AdminFormController@getViewJob'
+    ]);
+
     Route::get('/admin/add-user', [
         'as' => 'admin-add-user',
         'uses' => 'AdminAccountController@getAddUser'
@@ -126,6 +131,11 @@ Route::group(array('before' => 'auth'), function() {
         'uses' => 'AdminAccountController@getViewUser'
     ]);
 
+    Route::get('/admin/setup-filters/', [
+        'as' => 'admin-setup-filters',
+        'uses' => 'AdminFormController@getSetupFilters'
+    ]);
+
     Route::group(array('before' => 'csrf'), function() {
 
         Route::post('/admin/job-creator-post', [
@@ -133,16 +143,59 @@ Route::group(array('before' => 'auth'), function() {
             'uses' => 'AdminFormController@postJobCreator'
         ]);
 
+        Route::post('/admin/view-job-post/{id}', [
+            'as' => 'admin-view-job-post',
+            'uses' => 'AdminFormController@postViewJob'
+        ]);
+
         Route::post('/admin/add-user-post', [
             'as' => 'admin-add-user-post',
             'uses' => 'AdminAccountController@postAddUser'
+        ]);
+
+        Route::post('/admin/view-user-post/{id}', [
+            'as' => 'admin-view-user-post',
+            'uses' => 'AdminAccountController@postViewUser'
         ]);
 
         Route::post('/admin/change-password-post', [
             'as' => 'admin-change-password-post',
             'uses' => 'AdminAccountController@postChangePassword'
         ]);
+
+        Route::post('/admin/change-profile-image', [
+            'as' => 'admin-upload-avatar-post',
+            'uses' => 'AdminAccountController@postChangeProfileImage'
+        ]);
+
+        Route::post('/admin/setup-filters-post/', [
+            'as' => 'admin-setup-filters-post',
+            'uses' => 'AdminFormController@postSetupFilters'
+        ]);
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | AJAX
+    |--------------------------------------------------------------------------|
+    */
+
+    Route::get('/admin/delete-user/{id?}', array(
+        'as' => 'delete-user',
+        'uses' => 'AjaxController@deleteUser'
+    ));
+
+
+    Route::get('/admin/delete-job/{id?}', array(
+        'as' => 'delete-job',
+        'uses' => 'AjaxController@deleteJob'
+    ));
+
+    Route::get('/admin/approve-application/{id}/{status}', array(
+        'as' => 'approve-application',
+        'uses' => 'AjaxController@getApproveApplication'
+    ));
+
 });
 
 Route::group(array('before' => 'csrf'), function() {

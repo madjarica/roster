@@ -129,6 +129,56 @@ class AdminAccountController extends BaseController {
         }
     }
 
+    public function postViewUser($id) {
+        $validator = Validator::make(Input::all(), [
+            'user_type' => 'required|integer',
+            'email' => 'required|email|max:255',
+            'first_name' => 'required|max:60',
+            'last_name' => 'required|max:60',
+        ]);
+
+        if($validator->fails()) {
+            return Redirect::route('admin-view-user', $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+
+            $user_type = Input::get('user_type');
+            $email = Input::get('email');
+            $first_name = Input::get('first_name');
+            $last_name = Input::get('last_name');
+
+            $user = User::find($id);
+
+            $user->group = $user_type;
+            $user->first_name = $first_name;
+            $user->last_name = $last_name;
+            $user->email = $email;
+
+            if($user_type == 1) {
+                $role = AssignedRoles::where('user_id', $id)->first();
+                $role->role_id = 1;
+                $role->save();
+            } elseif($user_type == 2) {
+                $role = AssignedRoles::where('user_id', $id)->first();
+                $role->role_id = 2;
+                $role->save();
+            } elseif($user_type == 3) {
+                $role = AssignedRoles::where('user_id', $id)->first();
+                $role->role_id = 3;
+                $role->save();
+            }
+
+            if($user->save()) {
+                return Redirect::route('admin-view-user', $id)
+                    ->with('success', 'New account has been edited.');
+            } else {
+                return Redirect::route('admin-view-user', $id)
+                    ->with('error', 'There was an error editing account. Please try again later');
+            }
+        }
+    }
+
     public function getChangePassword() {
         return View::make('admin.change-password');
     }
@@ -162,7 +212,48 @@ class AdminAccountController extends BaseController {
     }
 
     public function getChangeProfileImage() {
-        return View::make('admin.change-avatar');
+        $user = Auth::user();
+        return View::make('admin.change-avatar')
+            ->with('user', $user);
+    }
+
+    public function postChangeProfileImage() {
+        if (Input::file('image') == "") {
+            return Redirect::route('admin-change-profile-image');
+        }
+
+        $validator = Validator::make(Input::all(), array(
+            'image' => 'max:5120|mimes:jpg,jpeg,png,gif'
+        ));
+
+        if ($validator->fails()) {
+            return Redirect::route('admin-change-profile-image')
+                ->withErrors($validator);
+        } else {
+            $user = User::find(Auth::user()->id);
+            $location = '';
+
+            if (Input::file('image') != "") {
+                $image = Input::file('image');
+                $image->getRealPath();
+                $destinationPath = 'public/img/avatars/';
+                $file_name = md5(rand() + time()) . '.' . $image->getClientOriginalExtension();
+
+                if ($_FILES['image']['error'] == 0) {
+                    move_uploaded_file($_FILES['image']['tmp_name'], "{$destinationPath}{$file_name}");
+                }
+
+                $location = '/img/avatars/' . $file_name;
+
+                $user->profile_image = $location;
+
+                if ($user->save()) {
+                    return Redirect::route('admin-change-profile-image')->with('success', 'Profile image changed.');
+                } else {
+                    return Redirect::route('admin-change-profile-image')->with('error', 'There was an error uploading new profile image. Please try again later.');
+                }
+            }
+        }
     }
 
     public function getForgotPassword() {
